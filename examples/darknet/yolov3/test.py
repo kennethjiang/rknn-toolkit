@@ -209,7 +209,7 @@ def download_yolov3_weight(dst_path):
     except urllib.error.URLError as e:
         print('URLError reason: ', e.reason)
     else:
-        print('Download yolov3.weight success.') 
+        print('Download yolov3.weight success.')
 
 
 if __name__ == '__main__':
@@ -308,6 +308,15 @@ if __name__ == '__main__':
 
     # Inference
     print('--> Running model')
+    import time
+    for i in range(10):
+        start_time = time.time()  # Record the start time
+        outputs = rknn.inference(inputs=[img])
+        end_time = time.time()  # Record the end time
+        execution_time = end_time - start_time  # Calculate the execution time
+        print(f'Iteration {i+1}: {execution_time:.6f} seconds')
+
+
     outputs = rknn.inference(inputs=[img])
     print('done')
 
